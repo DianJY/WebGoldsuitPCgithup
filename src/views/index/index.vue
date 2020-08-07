@@ -39,6 +39,8 @@
 import { menusList } from "../../network/index";
 export default {
   created() {
+    // console.log(localStorage.getItem('dx'));
+    console.log(this.$route.query);
     this.LeftMenusList();
   },
   data() {
@@ -52,7 +54,7 @@ export default {
         "35C9FC25-BEBF-4E11-8DB4-52FDD40B5D23"
       );
 
-      console.log(res);
+      // console.log(res);
 
       if (res.Code !== 200) return this.$message("获取数据错误！");
 

@@ -6,7 +6,7 @@
       </div>
       <div class="bodyDiv">
         <div class="bodyDivItem">
-          <span class="bodyDivItemSpan">您好！<b style="color:red;">XXX</b></span>
+          <span class="bodyDivItemSpan">您好！<b style="color:red;">{{this.$route.query.eName}}</b></span>
           
           <p class="bodyDivItemSpan">您有以下代办工作：</p>
 
