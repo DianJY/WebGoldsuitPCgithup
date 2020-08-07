@@ -10,7 +10,18 @@ Vue.use(VueRouter)
     },
   {
     path: "/index",
-    component: () => import("../views/index/index.vue")
+    component: () => import("../views/index/index.vue"),
+    children: [
+      {
+        path: "",
+        redirect: "zhuye"
+      },
+      {
+        path: "zhuye",
+        component: () => import("../views/index/zhuye.vue")
+      },
+
+    ]
   },
   {
     path: "/login",
