@@ -1,10 +1,11 @@
 import ajaxRequest from './ajaxRequest'
 
 // 查询人员
-export function GetpersonList() {
+export function getloginpwd(obj) {
     return ajaxRequest({
-        method: 'get',
-        url: `api/Documents/Getperson`
+        method: 'post',
+        url: `api/Documents/Getperson`,
+        data: obj
     })
 }
 
