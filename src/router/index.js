@@ -20,7 +20,14 @@ Vue.use(VueRouter)
         path: "zhuye",
         component: () => import("../views/index/zhuye.vue")
       },
-
+      {
+        path: "user",
+        component: () => import("../views/systemadmin/user.vue")
+      },
+      {
+        path: "role",
+        component: () => import("../views/systemadmin/role.vue")
+      },
     ]
   },
   {

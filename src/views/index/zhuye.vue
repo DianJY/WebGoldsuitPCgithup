@@ -20,7 +20,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  created(){
+    // ename= this.$route.query.eName
+    // console.log(this.ename);
+    let eName=this.$route.query.eName;
+    console.log(eName);
+    console.log(this.$route.query.eName);
+  },
+  data() {
+    return {
+    
+    };
+  },
+  methods:{},
+};
 </script>
 
 <style>

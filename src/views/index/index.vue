@@ -13,6 +13,7 @@
             default-active="2"
             class="el-menu-vertical-demo"
             unique-opened
+            router
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b"
@@ -39,8 +40,6 @@
 import { menusList } from "../../network/index";
 export default {
   created() {
-    // console.log(localStorage.getItem('dx'));
-    console.log(this.$route.query);
     this.LeftMenusList();
   },
   data() {
@@ -51,10 +50,10 @@ export default {
   methods: {
     async LeftMenusList() {
       const { data: res } = await menusList(
-        "35C9FC25-BEBF-4E11-8DB4-52FDD40B5D23"
+        this.$route.query.rId
       );
 
-      // console.log(res);
+      console.log(res);
 
       if (res.Code !== 200) return this.$message("获取数据错误！");
 
