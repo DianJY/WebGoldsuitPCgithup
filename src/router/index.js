@@ -20,6 +20,10 @@ Vue.use(VueRouter)
         path: "zhuye",
         component: () => import("../views/index/zhuye.vue")
       },
+      {
+        path: "projectapply",
+        component: () => import("../views/projectapplyrun/projectapply.vue")
+      },
 
     ]
   },
