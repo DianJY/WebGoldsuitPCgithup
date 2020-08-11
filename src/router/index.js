@@ -21,6 +21,7 @@ Vue.use(VueRouter)
         component: () => import("../views/index/zhuye.vue")
       },
       {
+<<<<<<< HEAD
         path: "user",
         component: () => import("../views/systemadmin/user.vue")
       },
@@ -28,6 +29,12 @@ Vue.use(VueRouter)
         path: "role",
         component: () => import("../views/systemadmin/role.vue")
       },
+=======
+        path: "projectapply",
+        component: () => import("../views/projectapplyrun/projectapply.vue")
+      },
+
+>>>>>>> 9ff582d4021575caafb255c3a45a099a45f70325
     ]
   },
   {
