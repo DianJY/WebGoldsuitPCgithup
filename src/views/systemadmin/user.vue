@@ -5,7 +5,7 @@
         <div class="divtitleSy">用户管理</div>
       </div>
       <el-breadcrumb separator="/" style="margin: 15px;">
-        <el-breadcrumb-item :to="{ path: '/zhuye' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/index/zhuye' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>系统管理</el-breadcrumb-item>
         <el-breadcrumb-item>用户管理</el-breadcrumb-item>
       </el-breadcrumb>

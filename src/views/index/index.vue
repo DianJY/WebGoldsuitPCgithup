@@ -18,7 +18,7 @@
             text-color="#fff"
             active-text-color="#ffd04b"
           >
-            <el-submenu style="" :index="item.mId+''" v-for="item in MenusList" :key="item.mId">
+            <el-submenu style :index="item.mId+''" v-for="item in MenusList" :key="item.mId">
               <template slot="title">
                 <i class="el-icon-location"></i>
                 <span>{{item.MenuName}}</span>
@@ -41,6 +41,8 @@ import { menusList } from "../../network/index";
 export default {
   created() {
     this.LeftMenusList();
+
+    console.log(window.sessionStorage.getItem("rId") + "----------------");
   },
   data() {
     return {
@@ -49,9 +51,8 @@ export default {
   },
   methods: {
     async LeftMenusList() {
-      const { data: res } = await menusList(
-        this.$route.query.rId
-      );
+      let rId = window.sessionStorage.getItem("rId");
+      const { data: res } = await menusList(rId);
 
       console.log(res);
 
@@ -69,7 +70,6 @@ export default {
   font-size: 25px;
   line-height: 60px;
   color: white;
-  
 }
 .el-header {
   background-color: rgb(84, 92, 100);
