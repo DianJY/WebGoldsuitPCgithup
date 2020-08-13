@@ -1,21 +1,23 @@
 <template>
   <div>
-       <div class="divtitle">
-        <div class="divtitleSy">新增项目申请</div>
-      </div>
-      <el-breadcrumb separator="/" style="margin: 15px;">
-        <el-breadcrumb-item :to="{ path: '/index/zhuye' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>项目申请</el-breadcrumb-item>
-        <el-breadcrumb-item>新增项目申请</el-breadcrumb-item>
-      </el-breadcrumb>
-            <div class="bodyDiv"></div>
+      <el-card class="box-card">
+    <div class="divtitle">
+      <div class="divtitleSy">新增项目申请</div>
+    </div>
+    <el-breadcrumb separator="/" style="margin: 15px;">
+      <el-breadcrumb-item :to="{ path: '/index/zhuye' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>项目申请</el-breadcrumb-item>
+      <el-breadcrumb-item>新增项目申请</el-breadcrumb-item>
+    </el-breadcrumb>
+    <div class="bodyDiv">
+      <el-from></el-from>
+    </div>
+      </el-card>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>

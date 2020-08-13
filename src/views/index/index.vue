@@ -40,7 +40,11 @@
 import { menusList } from "../../network/index";
 export default {
   created() {
+<<<<<<< HEAD
     this.LeftMenusList();  
+=======
+    this.LeftMenusList();
+>>>>>>> 5f9d22413d20a2d191c6390072d6661be3826e32
   },
   data() {
     return {
@@ -51,9 +55,12 @@ export default {
     async LeftMenusList() {
       let rId = window.sessionStorage.getItem("rId");
       const { data: res } = await menusList(rId);
+<<<<<<< HEAD
 
       // console.log(res);
 
+=======
+>>>>>>> 5f9d22413d20a2d191c6390072d6661be3826e32
       if (res.Code !== 200) return this.$message("获取数据错误！");
 
       this.MenusList = res.Data;

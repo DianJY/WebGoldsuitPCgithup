@@ -32,7 +32,10 @@ Vue.use(VueRouter)
         path: "projectapply",
         component: () => import("../views/projectapplyrun/projectapply.vue")
       },
-
+      {
+        path: "loan",
+        component: () => import("../views/loan/loan.vue")
+      },
     ]
   },
   {
