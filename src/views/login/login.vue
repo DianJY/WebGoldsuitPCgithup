@@ -91,6 +91,7 @@ export default {
         path: "/index",
         query: {
           eName: res.data.Data.data.eName,
+          
         },
       });
    window.sessionStorage.setItem(
