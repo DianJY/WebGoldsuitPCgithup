@@ -26,5 +26,13 @@ export function UpdateState(lid) {
 
     })
 }
+// 驳回
+export function Rejectinfo(lInfo) {
+    return ajaxRequest({
+        method: 'post',
+        url: `api/Loan/LoanRejectSave`,
+        data:lInfo
 
+    })
+}
 

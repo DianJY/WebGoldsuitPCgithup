@@ -49,7 +49,22 @@
                   type="primary"
                   size="small"
                 >受理</el-button>
-                <el-button v-show="scope.row.IState ==='已处理'" round type="success" size="small">创建项目</el-button>
+                <el-button
+                  v-show="scope.row.IState ==='待处理'"
+                  @click="ondialoog(scope.row.lid)"
+                  round
+                  type="warning"
+                  size="small"
+                >驳回</el-button>
+                <el-button
+                  v-show="scope.row.IState ==='已处理'"
+                  @click="Createpro(scope.row.lid)"
+                  round
+                  type="success"
+                  size="small"
+                >创建项目</el-button>
+                <label v-show="scope.row.IState ==='已驳回'">已驳回</label>
+                <label v-show="scope.row.IState ==='已创建项目'">已创建项目</label>
               </template>
             </el-table-column>
           </el-table>
@@ -62,6 +77,17 @@
               :total="totle"
             ></el-pagination>
           </div>
+          <el-dialog title="反驳原因" :visible.sync="dialogFormVisible">
+            <el-form :model="loanReject">
+              <el-form-item label="反驳原因">
+                <el-input type="textarea" v-model="loanReject.lrContent" autocomplete="off"></el-input>
+              </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+              <el-button @click="dialogFormVisible = false">取 消</el-button>
+              <el-button type="primary" @click="Reject()">确 定</el-button>
+            </div>
+          </el-dialog>
         </div>
       </div>
     </el-card>
@@ -69,7 +95,7 @@
 </template>
 
 <script>
-import { LoanList, UpdateState } from "../../network/loan";
+import { LoanList, UpdateState, Rejectinfo } from "../../network/loan";
 export default {
   created() {
     this.GetLoanListTo();
@@ -84,6 +110,12 @@ export default {
         UserName: "",
       },
       totle: 0,
+      loanReject: {
+        lid: "",
+        lrDateTime: "",
+        lrContent: "",
+      },
+      dialogFormVisible: false,
     };
   },
   methods: {
@@ -94,7 +126,6 @@ export default {
       this.totle = parseInt(
         (res.data.totle + this.params.limit - 1) / this.params.limit
       );
-      console.log(this.tableData);
     },
     //下一页
     next() {
@@ -127,20 +158,47 @@ export default {
 
       if (res === 0) return this.$message("受理失败！");
 
-
       this.$message({
         showClose: true,
         message: "受理成功！",
         type: "success",
       });
-        this.params.pageIndex = 1;
-       this.GetLoanListTo();
+      this.params.pageIndex = 1;
+      this.GetLoanListTo();
+    },
+    //打开弹出层
+    ondialoog(lid) {
+      this.loanReject.lid = lid;
+      this.loanReject.lrContent = "";
+      this.dialogFormVisible = true;
+    },
+
+    //驳回
+    async Reject() {
+      const res = await Rejectinfo(this.loanReject);
+      this.$message({
+        message: "驳回成功！",
+        type: "warning",
+      });
+      this.dialogFormVisible = false;
+      this.GetLoanListTo();
+    },
+
+    //创建项目
+    Createpro(url) {
+      console.log(url);
+      this.$router.replace({
+        path: "projectapply",
+        query: {
+          lid: url,
+        },
+      });
     },
   },
 };
 </script>
 
-<style>
+<style  scoped>
 .divtitle {
   width: 100%;
   height: 40px;
