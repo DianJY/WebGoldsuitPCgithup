@@ -270,7 +270,7 @@ export default {
 .bodyDiv {
   width: 100%;
   height: 700px;
-  border: 1px solid darkgrey;
+ 
   margin: 10px;
 }
 </style>
