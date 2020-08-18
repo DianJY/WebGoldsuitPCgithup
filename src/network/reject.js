@@ -5,7 +5,7 @@ export function RejectProjectInfo(obj) {
     return ajaxRequest({
         method: 'post',
         url: `api/Drafts/RejectProjectInfo`,
-        data:JSON.stringify(obj)
+        data: JSON.stringify(obj)
     })
 }
 
@@ -15,7 +15,7 @@ export function GetRejEctList(pId) {
     return ajaxRequest({
         method: 'get',
         url: `api/Drafts/GetRejEctList`,
-        params:{pId:pId}
+        params: { pId: pId }
     })
 }
 //查询审批审核日志
@@ -24,6 +24,20 @@ export function GetApprovalList(pId) {
     return ajaxRequest({
         method: 'get',
         url: `api/Drafts/GetApprovalList`,
-        params:{pId:pId}
+        params: { pId: pId }
+    })
+}
+
+//项目审核
+export function ApprovalapproveProject(obj) {
+    return ajaxRequest({
+        method: 'get',
+        url: `api/Drafts/ApprovalapproveProject`,
+        params: {
+            pId: obj.pId,
+            pState: obj.pState,
+            eId:obj.eId,
+            aOperation:obj.aOperation
+        }
     })
 }

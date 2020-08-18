@@ -37,7 +37,7 @@
           <el-table-column prop="pState" label="状态" width="100"></el-table-column>
           <el-table-column label="操作" width="240">
             <template slot-scope="scope">
-              <el-button type="primary" round size="small">审核</el-button>
+              <el-button type="primary" @click="ApprovePstate(scope.row.pId)" round size="small">审核</el-button>
               <!-- @click="SubmitPstate(scope.row.pId)"     -->
               <el-button type="primary" round size="small" @click="xiangxi(scope.row.pId)">查看详细</el-button>
               <el-button type="primary" round size="small" @click="bohui(scope.row.pId)">驳回</el-button>
@@ -75,11 +75,20 @@
 <script>
 import { GetprojectList } from "../../network/drafts";
 import detailedinfo from "./detailedinfo";
-import { RejectProjectInfo } from "../../network/reject";
+import {
+  RejectProjectInfo,
+  ApprovalapproveProject,
+} from "../../network/reject";
 export default {
   created() {
+    if (window.sessionStorage.getItem("rName") === "风控主管") {
+      this.paging.State = "一审";
+    } else if (window.sessionStorage.getItem("rName") === "分管领导") {
+      this.paging.State = "二审";
+    } else if (window.sessionStorage.getItem("rName") === "总经理") {
+      this.paging.State = "三审";
+    }
     this.GetprojectLists();
-    console.log(window.sessionStorage.getItem("rName"));
   },
   components: {
     detailedinfo,
@@ -101,6 +110,11 @@ export default {
       dialogVisible1: false,
       pId: "",
       rContent: "",
+
+      eId: "",
+      aOperation: "",
+
+      pState: "",
     };
   },
   methods: {
@@ -153,7 +167,7 @@ export default {
       };
       var obj = {
         Reject: Reject,
-        Approval: Approval
+        Approval: Approval,
       };
       const res = await RejectProjectInfo(obj);
 
@@ -164,8 +178,40 @@ export default {
         type: "warning",
       });
       console.log(res.data);
-    this.dialogVisible1 = false;
+      this.dialogVisible1 = false;
       this.GetprojectLists();
+    },
+
+    //审核
+    async ApprovePstate(pId) {
+      if (window.sessionStorage.getItem("rName") === "部门主管") {
+        this.pState = "一审";
+      } else if (window.sessionStorage.getItem("rName") === "风控主管") {
+        this.pState = "二审";
+      } else if (window.sessionStorage.getItem("rName") === "分管领导") {
+        this.pState = "三审";
+      } else if (window.sessionStorage.getItem("rName") === "总经理") {
+        this.pState = "待发布";
+      }
+      this.eId = window.sessionStorage.getItem("eId");
+      this.aOperation = window.sessionStorage.getItem("rName") + "复审";
+
+      var obj = {
+        pId: pId,
+        pState: this.pState,
+        eId: this.eId,
+        aOperation: this.aOperation,
+      };
+      const res = await ApprovalapproveProject(obj);
+
+      if (res === 0)   return this.$message({message: "数据错误", type: "warning",});
+
+
+        this.$message({
+          message: '审批成功！',
+          type: 'success'
+        });
+     this.GetprojectLists();
     },
   },
 };
