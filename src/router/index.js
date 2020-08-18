@@ -44,11 +44,22 @@ const routes = [
         path: "agencywork",
         component: () => import("../views/projectapplyrun/agencywork.vue")
       },
-       {
+      {
         path: "workdone",
         component: () => import("../views/projectapplyrun/workdone.vue")
       },
-
+      {
+        path: "Banner",
+        component: () => import("../views/content/Banner.vue")
+      },
+      {
+        path: "News",
+        component: () => import("../views/content/News.vue")
+      },
+      {
+        path: "information",
+        component: () => import("../views/content/information.vue")
+      },
     ]
   },
   {
