@@ -36,6 +36,18 @@ Vue.use(VueRouter)
         path: "loan",
         component: () => import("../views/loan/loan.vue")
       },
+      {
+        path: "Banner",
+        component: () => import("../views/content/Banner.vue")
+      },
+      {
+        path: "News",
+        component: () => import("../views/content/News.vue")
+      },
+      {
+        path: "information",
+        component: () => import("../views/content/information.vue")
+      },
     ]
   },
   {

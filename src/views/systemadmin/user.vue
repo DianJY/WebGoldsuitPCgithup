@@ -27,22 +27,22 @@
             stripe
             style="margin-top:20px; width:100%"
           >
-            <el-table-column prop="eId" v-if="a" width="80"></el-table-column>
-            <el-table-column type="index" label="序号" width="80"></el-table-column>
-            <el-table-column prop="eName" label="用户名" width="100"></el-table-column>
-            <el-table-column prop="ePhone" label="电话" width="120"></el-table-column>
-            <el-table-column prop="eSex" label="性别" width="150"></el-table-column>
-            <el-table-column prop="eBirth" label="出生日期" width="200"></el-table-column>
-            <el-table-column prop="rName" label="角色" width="150"></el-table-column>
+            <el-table-column prop="eId" v-if="a" width="80" align="center"></el-table-column>
+            <el-table-column type="index" label="序号" width="80" align="center"></el-table-column>
+            <el-table-column prop="eName" label="用户名" width="100" align="center"></el-table-column>
+            <el-table-column prop="ePhone" label="电话" width="120" align="center"></el-table-column>
+            <el-table-column prop="eSex" label="性别" width="150" align="center"></el-table-column>
+            <el-table-column prop="eBirth" label="出生日期" width="200" align="center"></el-table-column>
+            <el-table-column prop="rName" label="角色" width="150" align="center"></el-table-column>
 
-            <el-table-column label="状态" width="150">
+            <el-table-column label="状态" width="150" align="center">
               <template slot-scope="data">
                 <i class="el-icon-check" style="color:lightgreen" v-if="data.row.eState=='在职人员'"></i>
                 <i class="el-icon-close" style="color:red" v-else></i>
               </template>
             </el-table-column>
 
-            <el-table-column prop="eLogin" label="登录名" width="150"></el-table-column>
+            <el-table-column prop="eLogin" label="登录名" width="150" align="center"></el-table-column>
 
             <el-table-column label="操作" width="180" align="center">
               <template slot-scope="scope">
@@ -97,6 +97,7 @@
                   v-model="usersInfo.rId"
                   placeholder="请选择角色"
                   :label-width="formLabelWidth"
+                  @change="hq"
                 >
                   <el-option
                     v-for="item in rolesInfo"
@@ -144,7 +145,7 @@
     </el-card>
   </div>
 </template>
-<script>
+<script scoped>
 import {
   getUserListService,
   deleteUserService,

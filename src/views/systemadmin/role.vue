@@ -36,9 +36,9 @@
               </el-row>
             </template>
           </el-table-column>
-          <el-table-column prop="rId" label="编号" width="400"></el-table-column>
-          <el-table-column prop="rName" label="角色名称" width="200"></el-table-column>
-          <el-table-column label="操作" width="220">
+          <el-table-column  prop="rId" label="编号" width="400" align="center"></el-table-column>
+          <el-table-column prop="rName" label="角色名称" width="200" align="center"> </el-table-column>
+          <el-table-column label="操作" width="220" align="center">
             <template slot-scope="scope">
               <el-button
                 type="success"
