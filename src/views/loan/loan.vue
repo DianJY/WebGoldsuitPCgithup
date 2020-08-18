@@ -91,6 +91,7 @@
         </div>
       </div>
     </el-card>
+
   </div>
 </template>
 
@@ -116,6 +117,7 @@ export default {
         lrContent: "",
       },
       dialogFormVisible: false,
+
     };
   },
   methods: {

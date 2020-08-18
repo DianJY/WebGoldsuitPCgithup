@@ -22,7 +22,7 @@
 <script>
 export default {
   created(){
-    let eName=this.$route.query.eName;
+    let eName=window.sessionStorage.getItem("eName");
   },
   data() {
     return {
@@ -33,7 +33,8 @@ export default {
 };
 </script>
 
-<style>
+<style  scoped>
+
 .divtitle {
   width: 100%;
   height: 40px;

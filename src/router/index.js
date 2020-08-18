@@ -3,11 +3,11 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-  const routes = [
-    {
-      path: "",
-      redirect: "/login"
-    },
+const routes = [
+  {
+    path: "",
+    redirect: "/login"
+  },
   {
     path: "/index",
     component: () => import("../views/index/index.vue"),
@@ -36,6 +36,19 @@ Vue.use(VueRouter)
         path: "loan",
         component: () => import("../views/loan/loan.vue")
       },
+      {
+        path: "drafts",
+        component: () => import("../views/projectapplyrun/drafts.vue")
+      },
+      {
+        path: "agencywork",
+        component: () => import("../views/projectapplyrun/agencywork.vue")
+      },
+       {
+        path: "workdone",
+        component: () => import("../views/projectapplyrun/workdone.vue")
+      },
+
     ]
   },
   {

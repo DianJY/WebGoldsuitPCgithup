@@ -70,38 +70,19 @@ export default {
         "token",
         JSON.stringify(res.data.Data.token)
       );
+
+   
+     
       this.$message({
         message: "登陆成功",
         type: "success",
       });
 
-      //   var query = {
-      //     eName: res.data.Data.data.eName,
-      //     eId: res.data.Data.data.eId,
-      //     rId: res.data.Data.data.rId,
-      //   };
-
-      //   window.localStorage.setItem("dx", JSON.stringify(query));
-
-      //   this.$router.push({
-      //       path:'/index'
-      //   })
-
-      this.$router.replace({
-        path: "/index",
-        query: {
-          eName: res.data.Data.data.eName,
-          
-        },
-      });
-   window.sessionStorage.setItem(
-        "eId",
-       res.data.Data.data.eId
-      );
-      window.sessionStorage.setItem(
-        "rId",
-        res.data.Data.data.rId
-      );
+      this.$router.replace({ path: "/index" });
+      window.sessionStorage.setItem("eName", res.data.Data.data.eName);
+      window.sessionStorage.setItem("eId", res.data.Data.data.eId);
+      window.sessionStorage.setItem("rId", res.data.Data.data.rId);
+      window.sessionStorage.setItem("rName", res.data.Data.data.rName);
     },
   },
 };

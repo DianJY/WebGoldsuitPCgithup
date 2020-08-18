@@ -41,7 +41,7 @@
               <el-form-item label="项目编号：">
                 <el-input v-model="project.pNumber"></el-input>
               </el-form-item>
-              <el-form-item label="项目名称:">
+              <el-form-item label="项目名称：">
                 <el-input v-model="project.pNmae"></el-input>
               </el-form-item>
               <el-form-item label="项目简介：">
@@ -239,12 +239,13 @@ import {
 } from "../../network/projectapply";
 export default {
   created() {
+    this.project.eId = window.sessionStorage.getItem("eId");
     let lids = this.$route.query.lid;
     if (lids != null) {
-      this.change(lids)
-      this.lid = lids
+      this.change(lids);
+      this.lid = lids;
     }
-
+    console.log(this.project.eId);
     this.loadGetLoanaccept();
   },
   data() {
@@ -283,6 +284,8 @@ export default {
         Totalplatform: "",
         TotalLiutou: "",
         lid: "",
+        pState: "待提交",
+        eId: "",
       },
       borrower: {
         bId: "",
@@ -351,6 +354,7 @@ export default {
 
       //总还款
       this.project.Totalamount = (
+          parseFloat(this.project.Loanamount) +
         parseFloat(this.project.Totalinterest) +
         parseFloat(this.project.Totalplatform) +
         parseFloat(this.project.TotalLiutou)
@@ -390,7 +394,6 @@ export default {
     checkchange() {
       const res = new Map();
       this.checked = this.checked.filter((a) => !res.has(a) && res.set(a, 1));
-      console.log(this.checked);
     },
     //保存
     async projectapplySave() {
@@ -402,12 +405,17 @@ export default {
         Borrower: this.borrower,
       };
       const res = await SaveProjectandBorrower(obj);
+
+      this.$message({
+        message: "添加项目成功！",
+        type: "success",
+      });
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .spanl {
   position: absolute;
 }
