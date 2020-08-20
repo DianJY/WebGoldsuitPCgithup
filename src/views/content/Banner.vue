@@ -23,6 +23,19 @@ export default {};
   width: 100%;
   height: 700px;
 
-  margin: 10px;
+  margin: 20px;
+}
+.divtitle {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(239, 251, 255);
+}
+.divtitleSy {
+  height: 20px;
+  font-size: 18px;
+  line-height: 40px;
+  width: 200px;
+  color: rgb(37, 124, 255);
+  margin-left: 10px;
 }
 </style>

@@ -60,6 +60,11 @@ const routes = [
         path: "information",
         component: () => import("../views/content/information.vue")
       },
+      {
+        path: "feedback",
+        component: () => import("../views/content/feedback.vue")
+      },
+      
     ]
   },
   {
