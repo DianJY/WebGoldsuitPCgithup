@@ -101,7 +101,6 @@ export default {
     async getrolesList() {
       const res = await getRolesListService();
       this.roleList = res.data.data;
-      console.log(123);
     },
 
     //删除角色权限

@@ -48,6 +48,7 @@ const routes = [
         path: "workdone",
         component: () => import("../views/projectapplyrun/workdone.vue")
       },
+
       {
         path: "Banner",
         component: () => import("../views/content/Banner.vue")
@@ -60,6 +61,38 @@ const routes = [
         path: "information",
         component: () => import("../views/content/information.vue")
       },
+      {
+        path: "approved",
+        component: () => import("../views/pm/approved.vue")
+      },
+      {
+        path: "released",
+        component: () => import("../views/pm/released.vue")
+      },
+      {
+        path: "failure",
+        component: () => import("../views/pm/failure.vue")
+      },
+       {
+        path: "payment",
+        component: () => import("../views/pm/payment.vue")
+      },
+      {
+        path: "investment",
+        component: () => import("../views/pm/investment.vue")
+      },
+      {
+        path: "depositcharge",
+        component: () => import("../views/remit/depositcharge.vue")
+      },   
+        {
+        path: "deposithastodo",
+        component: () => import("../views/remit/deposithastodo.vue")
+      }, 
+      {
+        path: "hasbeencharged",
+        component: () => import("../views/remit/hasbeencharged.vue")
+      }, 
       {
         path: "feedback",
         component: () => import("../views/content/feedback.vue")
