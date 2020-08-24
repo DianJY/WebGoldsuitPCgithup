@@ -32,7 +32,9 @@
             <el-table-column prop="eName" label="用户名" width="100" align="center"></el-table-column>
             <el-table-column prop="ePhone" label="电话" width="120" align="center"></el-table-column>
             <el-table-column prop="eSex" label="性别" width="150" align="center"></el-table-column>
-            <el-table-column prop="eBirth" label="出生日期" width="200" align="center"></el-table-column>
+            <el-table-column prop="eBirth" label="出生日期" width="200" align="center">
+               <template slot-scope="scope">{{scope.row.eBirth | dataFormart}}</template>
+            </el-table-column>
             <el-table-column prop="rName" label="角色" width="150" align="center"></el-table-column>
 
             <el-table-column label="状态" width="150" align="center">

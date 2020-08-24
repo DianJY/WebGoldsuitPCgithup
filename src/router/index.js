@@ -93,6 +93,10 @@ const routes = [
         path: "hasbeencharged",
         component: () => import("../views/remit/hasbeencharged.vue")
       }, 
+      {
+        path: "feedback",
+        component: () => import("../views/content/feedback.vue")
+      },
       
     ]
   },

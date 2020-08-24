@@ -44,7 +44,9 @@
           <el-table-column type="index" label="序号" width="80" align="center"></el-table-column>
           <el-table-column prop="nType" label="类型" width="200" align="center"></el-table-column>
           <el-table-column prop="nTiteName" label="标题" width="220" align="center"></el-table-column>
-          <el-table-column prop="nDateTime" label="新闻发布时间" width="250" align="center"></el-table-column>
+          <el-table-column prop="nDateTime" label="新闻发布时间" width="250" align="center">
+              <template slot-scope="scope">{{scope.row.nDateTime | dataFormart}}</template>
+          </el-table-column>
           <el-table-column prop="nDisplay" label="是否显示" width="200" align="center">
             <template slot-scope="data">
               <i class="el-icon-check" style="color:lightgreen" v-if="data.row.nDisplay=='显示'"></i>
@@ -297,5 +299,18 @@ export default {
   height: 700px;
 
   margin: 20px;
+}
+.divtitle {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(239, 251, 255);
+}
+.divtitleSy {
+  height: 20px;
+  font-size: 18px;
+  line-height: 40px;
+  width: 200px;
+  color: rgb(37, 124, 255);
+  margin-left: 10px;
 }
 </style>
