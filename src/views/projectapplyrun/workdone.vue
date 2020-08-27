@@ -61,7 +61,7 @@
       </div>
     </el-card>
 
-    <el-dialog title="项目详细信息"  :visible.sync="dialogVisible" width="70%">
+    <el-dialog title="项目详细信息" :visible.sync="dialogVisible" width="70%">
       <detailedinfo :pId="pId" v-if="dialogVisible"></detailedinfo>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
@@ -78,7 +78,7 @@ export default {
   created() {
     this.GetprojectListexs();
   },
-   components: {
+  components: {
     detailedinfo,
   },
   data() {
@@ -86,10 +86,10 @@ export default {
       tableData: [],
       paging: {
         pageIndex: 1,
-        limit: 5,
+        limit: 2,
         pName: "",
       },
-      totle:0,
+      totle: 0,
       pId: "",
       dialogVisible: false,
     };
@@ -98,9 +98,11 @@ export default {
     async GetprojectListexs() {
       const res = await GetprojectListex(this.paging);
       this.tableData = res.data.Data;
-      this.totle = parseInt(
-        (res.data.totle + this.paging.limit - 1) / this.paging.limit
-      );
+      this.totle =res.data.totle 
+        /* parseInt(
+          (res.data.totle + this.paging.limit - 1) 
+        ) ; */
+             
     },
     //下一页
     next() {

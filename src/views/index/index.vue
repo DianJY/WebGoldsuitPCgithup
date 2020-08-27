@@ -20,7 +20,7 @@
           >
             <el-submenu style :index="item.mId+''" v-for="item in MenusList" :key="item.mId">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <i :class="item.Icon"></i>
                 <span>{{item.MenuName}}</span>
               </template>
               <el-menu-item-group v-for="item in item.children" :key="item.mId">
@@ -53,7 +53,6 @@ export default {
       let rId = window.sessionStorage.getItem("rId");
       const { data: res } = await menusList(rId);
 
-   
 
       if (res.Code !== 200) return this.$message("获取数据错误！");
 

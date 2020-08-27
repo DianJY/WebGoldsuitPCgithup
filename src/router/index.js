@@ -73,7 +73,7 @@ const routes = [
         path: "failure",
         component: () => import("../views/pm/failure.vue")
       },
-       {
+      {
         path: "payment",
         component: () => import("../views/pm/payment.vue")
       },
@@ -84,20 +84,32 @@ const routes = [
       {
         path: "depositcharge",
         component: () => import("../views/remit/depositcharge.vue")
-      },   
-        {
+      },
+      {
         path: "deposithastodo",
         component: () => import("../views/remit/deposithastodo.vue")
-      }, 
+      },
       {
         path: "hasbeencharged",
         component: () => import("../views/remit/hasbeencharged.vue")
-      }, 
+      },
       {
         path: "feedback",
         component: () => import("../views/content/feedback.vue")
       },
-      
+      {
+        path: "repaymentagency",
+        component: () => import("../views/repayment/repaymentagency.vue")
+      },
+      {
+        path: "repaymenthasbeenmade",
+        component: () => import("../views/repayment/repaymenthasbeenmade.vue")
+      }, 
+      {
+        path: "paid",
+        component: () => import("../views/repayment/paid.vue")
+      },
+
     ]
   },
   {

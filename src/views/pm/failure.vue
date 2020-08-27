@@ -90,9 +90,10 @@ export default {
     async GetprojectLists() {
       const res = await GetListDrafts(this.paging);
       this.tableData = res.data.Data;
-      this.totle = parseInt(
+      this.totle = res.data.totle
+      /* parseInt(
         (res.data.totle + this.paging.limit - 1) / this.paging.limit
-      );
+      ); */
     },
     //下一页
     next() {

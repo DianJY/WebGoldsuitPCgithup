@@ -50,7 +50,7 @@
           @prev-click="prev"
           :page-size="paging.limit"
           :total="totle"
-        ></el-pagination>
+        ></el-pagination> 
 
         <el-dialog title="项目详细信息" :visible.sync="dialogVisible" width="70%">
           <detailedinfo :pId="pId" v-if="dialogVisible"></detailedinfo>
@@ -121,9 +121,10 @@ export default {
     async GetprojectLists() {
       const res = await GetprojectList(this.paging);
       this.tableData = res.data.Data;
-      this.totle = parseInt(
+      this.totle = res.data.totle
+      /* parseInt(
         (res.data.totle + this.paging.limit - 1) / this.paging.limit
-      );
+      ); */
     },
     //下一页
     next() {
@@ -171,13 +172,12 @@ export default {
       };
       const res = await RejectProjectInfo(obj);
 
-      if (res.data !== 1) return this.$message.error("数据出错！");
+      if (res.data === 0) return this.$message.error("数据出错！");
 
       this.$message({
         message: "驳回成功！",
         type: "warning",
       });
-      console.log(res.data);
       this.dialogVisible1 = false;
       this.GetprojectLists();
     },
