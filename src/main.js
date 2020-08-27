@@ -21,6 +21,7 @@ Vue.filter('dataFormart', function (value) {
   return `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss} `
 })
 
+
 Vue.config.productionTip = false
 
 new Vue({
@@ -28,3 +29,6 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+
+
