@@ -65,10 +65,10 @@ export function GetRemitjournalList(pId) {
 }
 
 //审批
-export function SubmitRemit(rId) {
+export function SubmitRemit(rId,eId) {
     return ajaxRequest({
         method: 'get',
-        url: 'api/Depositmanagement/SubmitRemit?rId='+rId,
+        url: `api/Depositmanagement/SubmitRemit?rId=${rId}&eId=${eId}`,
     })
 }
 

@@ -123,11 +123,12 @@ export default {
   methods: {
     async GetLoanListTo() {
       const res = await LoanList(this.params);
-      this.totle = res.data.totle;
+  
       this.tableData = res.data.Data;
-      this.totle = parseInt(
+      this.totle =res.data.totle
+       /* parseInt(
         (res.data.totle + this.params.limit - 1) / this.params.limit
-      );
+      ); */
     },
     //下一页
     next() {

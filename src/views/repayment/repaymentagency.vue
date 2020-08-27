@@ -1,13 +1,15 @@
+
 <template>
   <div>
+    <!--/* 还款代办 */-->
     <el-card class="box-card">
       <el-breadcrumb separator="/" style="margin: 15px;">
         <el-breadcrumb-item :to="{ path: '/index/zhuye' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>项目管理</el-breadcrumb-item>
-        <el-breadcrumb-item>已审批待发布</el-breadcrumb-item>
+        <el-breadcrumb-item>还款管理</el-breadcrumb-item>
+        <el-breadcrumb-item>还款代办</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="divtitle">
-        <div class="divtitleSy">已审批待发布</div>
+        <div class="divtitleSy">还款代办</div>
       </div>
       <div class="bodyDiv">
         <el-table :data="tableData" stripe style="width: 100%">
@@ -34,12 +36,18 @@
               <label>{{scope.row.ValueDate}}---{{scope.row.Duedate}}</label>
             </template>
           </el-table-column>
-          <el-table-column prop="pState" label="状态" width="100"></el-table-column>
-          <el-table-column label="操作" width="240">
+          <el-table-column prop="pState" label="状态" width="140"></el-table-column>
+          <el-table-column label="操作" width="390">
             <template slot-scope="scope">
-              <el-button type="primary" @click="ApprovePstate(scope.row.pId)" round size="small">发布</el-button>
-              <!-- @click="SubmitPstate(scope.row.pId)" -->
+              <el-button
+                type="primary"
+                @click="ApprovePstate(scope.row.pId)"
+                round
+                size="small"
+              >申请还款</el-button>
+              <!-- @click="SubmitPstate(scope.row.pId)"     -->
               <el-button type="primary" round size="small" @click="xiangxi(scope.row.pId)">查看详细</el-button>
+              <el-button type="primary" round size="small" @click="Bohui(scope.row.pId)">查看驳回信息</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -58,17 +66,35 @@
             <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
           </span>
         </el-dialog>
+
+        <el-dialog title="项目详细信息" :visible.sync="dialogVisible2" width="70%">
+          <el-table :data="RepayReject" stripe style="width: 100%">
+            <el-table-column type="index" label="序号" width="100"></el-table-column>
+            <el-table-column prop="jDateTime" label="日期" width="180"></el-table-column>
+            <el-table-column prop="eName" label="操作人" width="140"></el-table-column>
+            <el-table-column prop="reContent" label="原因"></el-table-column>
+          </el-table>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible2 = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
+          </span>
+        </el-dialog>
       </div>
     </el-card>
   </div>
 </template>
 
 <script>
-import { GetListDrafts, PutProject } from "../../network/pm";
+import {
+  GetProjectList,
+  ApplicationRepayment,
+  GetRepaymentInfo,
+  GetRepayRejectList,
+} from "../../network/repaymentagency";
 import detailedinfo from "./detailedinfo";
 export default {
   created() {
-    this.GetprojectLists();
+    this.GetProjectListData();
   },
   components: {
     detailedinfo,
@@ -79,38 +105,45 @@ export default {
       paging: {
         pageIndex: 1,
         limit: 5,
-        State: "待发布",
       },
       totle: 0,
-      pId: "",
+      dialogFormVisible: false,
+      project: {},
       dialogVisible: false,
+      dialogVisible1: false,
+      pId: "",
+      pName: "",
+      dialogVisible2: false,
+      RepayReject: [],
     };
   },
   methods: {
-    async GetprojectLists() {
-      const res = await GetListDrafts(this.paging);
-      this.tableData = res.data.Data;
-      this.totle = res.data.totle
+    async GetProjectListData() {
+      var obj = {
+        pageIndex: this.paging.pageIndex,
+        limit: this.paging.limit,
+        pName: this.pName,
+      };
 
-   
-      /* parseInt(
-        (res.data.totle + this.paging.limit - 1) / this.paging.limit
-      ); */
+      const res = await GetProjectList(obj);
+
+      this.tableData = res.data.Data;
+      this.totle = res.data.totle;
     },
     //下一页
     next() {
       this.paging.pageIndex++;
-      this.GetprojectLists();
+      this.GetProjectListData();
     },
     //上一页
     prev() {
       this.paging.pageIndex--;
-      this.GetprojectLists();
+      this.GetProjectListData();
     },
     //跳转
     handleCurrentChange(value) {
       this.paging.pageIndex = value;
-      this.GetprojectLists();
+      this.GetProjectListData();
     },
     //查看详细
     xiangxi(pId) {
@@ -118,19 +151,34 @@ export default {
       this.dialogVisible = true;
     },
 
-    //发布
     async ApprovePstate(pId) {
-      const res = await PutProject(pId);
+      const state = await GetRepaymentInfo(pId);
+      console.log(state.data.Data.reSate);
+      if (
+        state.data.Data.reSate == null ||
+        state.data.Data.reSate == "已驳回"
+      ) {
+        const res = await ApplicationRepayment(pId);
 
-      if (res.data !== 1) {
-        return this.$message.error("数据出错");
+        if (res.Data === 0) return this.$message.error("数据出错。。");
+
+        return this.$message({
+          message: "申请成功！",
+          type: "success",
+        });
+      } else {
+        return this.$message({
+          message: "已审核，请勿重复提交！",
+          type: "warning",
+        });
       }
-
-      this.$message({
-        message: "发布成功！",
-        type: "success",
-      });
-        this.GetprojectLists();
+    },
+    async Bohui(pId) {
+      const res = await GetRepayRejectList(pId);
+   
+      this.RepayReject = res.data.Data;
+       console.log( res);
+      this.dialogVisible2 = true;
     },
   },
 };
@@ -165,4 +213,3 @@ export default {
   margin: 10px;
 }
 </style>
-

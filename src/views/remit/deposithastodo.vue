@@ -22,7 +22,7 @@
               <!-- @click="SubmitPstate(scope.row.pId)" -->
               <el-button
                 type="primary"
-                v-show="scope.row.ReState === '待审核'"
+                v-show="scope.row.ReState === '待划账'"
                 round
                 size="small"
                 @click="SubmitPstate(scope.row.rId)"
@@ -119,9 +119,10 @@ export default {
     async GetRemitListData() {
       const res = await GetRemitList(this.paging);
       this.RemitList = res.data.Data;
-      this.totle = parseInt(
+      this.totle = res.data.totle;
+      /* parseInt(
         (res.data.totle + this.paging.limit - 1) / this.paging.limit
-      );
+      ); */
     },
     //下一页
     next() {
@@ -180,7 +181,7 @@ export default {
 
     //审批
     async SubmitPstate(rId) {
-      const res = await SubmitRemit(rId);
+      const res = await SubmitRemit(rId,window.sessionStorage.getItem("eId"));
 
       if (res.data === 0) return this.$message.error("数据出错！");
 
@@ -194,7 +195,9 @@ export default {
       const res = await GetProjectInfo(pId);
       this.huazhanginfo = res.data.Data;
       this.huazhanginfo.Actual = this.huazhanginfo.Actual.toFixed(2);
-      this.huazhanginfo.Totalplatform = this.huazhanginfo.Totalplatform.toFixed(2);
+      this.huazhanginfo.Totalplatform = this.huazhanginfo.Totalplatform.toFixed(
+        2
+      );
       this.huazhanginfo.TotalLiutou = this.huazhanginfo.TotalLiutou.toFixed(2);
 
       this.dialogVisible2 = true;

@@ -245,7 +245,6 @@ export default {
       this.change(lids);
       this.lid = lids;
     }
-    console.log(this.project.eId);
     this.loadGetLoanaccept();
   },
   data() {
