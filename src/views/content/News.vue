@@ -45,7 +45,7 @@
           <el-table-column prop="nType" label="类型" width="200" align="center"></el-table-column>
           <el-table-column prop="nTiteName" label="标题" width="220" align="center"></el-table-column>
           <el-table-column prop="nDateTime" label="新闻发布时间" width="250" align="center">
-              <template slot-scope="scope">{{scope.row.nDateTime | dataFormart}}</template>
+            <template slot-scope="scope">{{scope.row.nDateTime | dataFormart}}</template>
           </el-table-column>
           <el-table-column prop="nDisplay" label="是否显示" width="200" align="center">
             <template slot-scope="data">
@@ -118,8 +118,8 @@
         </el-dialog>
 
         <!-- 弹出层：新增 -->
-        <el-dialog title="新闻公告详情" :visible.sync="diaolgAdd">
-          <el-form :model="newsListadd">
+        <el-dialog title="新闻公告详情" :visible.sync="diaolgAdd" @closed="closeEvent">
+          <el-form ref="userInfoFrom" :model="newsListadd">
             <el-form-item style="display:none" label="nId" :label-width="formLabelWidth">
               <el-input v-model="newsListadd.nId"></el-input>
             </el-form-item>
@@ -211,6 +211,17 @@ export default {
     },
 
     // danqianxz(value) {},
+
+    //关闭弹出层回调
+    closeEvent() {
+      this.$refs.userInfoFrom.resetFields();
+      (this.newsListadd.nId = ""),
+        (this.newsListadd.nType = ""),
+        (this.newsListadd.nTiteName = ""),
+        (this.newsListadd.nDateTime = ""),
+        (this.newsListadd.nContent = ""),
+        (this.newsListadd.nDisplay = "");
+    },
 
     handleSizeChange(newValue) {
       this.queryInfo.pagesize = newValue;
