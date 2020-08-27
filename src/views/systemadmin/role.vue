@@ -36,8 +36,8 @@
               </el-row>
             </template>
           </el-table-column>
-          <el-table-column  prop="rId" label="编号" width="400" align="center"></el-table-column>
-          <el-table-column prop="rName" label="角色名称" width="200" align="center"> </el-table-column>
+          <el-table-column prop="rId" label="编号" width="400" align="center"></el-table-column>
+          <el-table-column prop="rName" label="角色名称" width="200" align="center"></el-table-column>
           <el-table-column label="操作" width="220" align="center">
             <template slot-scope="scope">
               <el-button
@@ -117,7 +117,7 @@ export default {
       this.dialogSQ = true;
       this.roid = roleinfo.rId;
       this.getroleTreeList();
-      // console.log(roleinfo);
+      console.log(roleinfo);
       this.getDefaultKeys(roleinfo, this.defaultCheckKeys);
     },
 
@@ -136,7 +136,6 @@ export default {
       //递归权限
       node.children.forEach((item) => {
         this.getDefaultKeys(item, arr);
-       
       });
     },
 
@@ -159,7 +158,6 @@ export default {
       });
       this.getrolesList();
       this.dialogSQ = false;
-      
     },
   },
 };
