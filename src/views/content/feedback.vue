@@ -113,7 +113,7 @@
 <script>
 import {
   gerFeedbackListService,
-  MoHuGetFeedBackListService,
+  
 } from "../../network/feedback";
 export default {
   created() {
@@ -147,7 +147,8 @@ export default {
     async getFeedbackList() {
       const res = await gerFeedbackListService(
         this.queryInfo.pagenum,
-        this.queryInfo.pagesize
+        this.queryInfo.pagesize,
+        this.numberValidateForm
       );
       this.yijianfkList = res.data.data;
       this.total = res.data.totle;
@@ -165,18 +166,19 @@ export default {
       this.diaolgAdd = true;
     },
     async mohuchaxun() {
-      const res = await MoHuGetFeedBackListService(
-        this.numberValidateForm.fType,
-        this.numberValidateForm.fDateTime,
-        this.numberValidateForm.UserName,
-        this.numberValidateForm.LoginPhone,
-        this.queryInfo.pagenum,
-        this.queryInfo.pagesize
-      );
-      console.log(this.numberValidateForm);
-      this.yijianfkList = res.data.data;
-      this.total = res.data.totle;
-      console.log(res);
+       this.getFeedbackList();
+      // const res = await MoHuGetFeedBackListService(
+      //   this.numberValidateForm.fType,
+      //   this.numberValidateForm.fDateTime,
+      //   this.numberValidateForm.UserName,
+      //   this.numberValidateForm.LoginPhone,
+      //   this.queryInfo.pagenum,
+      //   this.queryInfo.pagesize
+      // );
+      // console.log(this.numberValidateForm);
+      // this.yijianfkList = res.data.data;
+      // this.total = res.data.totle;
+      // console.log(res);
     },
   },
 };

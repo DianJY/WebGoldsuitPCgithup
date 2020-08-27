@@ -33,7 +33,7 @@
             <el-table-column prop="ePhone" label="电话" width="120" align="center"></el-table-column>
             <el-table-column prop="eSex" label="性别" width="150" align="center"></el-table-column>
             <el-table-column prop="eBirth" label="出生日期" width="200" align="center">
-               <template slot-scope="scope">{{scope.row.eBirth | dataFormart}}</template>
+              <template slot-scope="scope">{{scope.row.eBirth | dataFormart}}</template>
             </el-table-column>
             <el-table-column prop="rName" label="角色" width="150" align="center"></el-table-column>
 
@@ -66,9 +66,9 @@
           ></el-pagination>
 
           <!-- 弹出层：新增用户信息 -->
-          <el-dialog title="用户信息" :visible.sync="dialogVisible">
+          <el-dialog title="用户信息" :visible.sync="dialogVisible" @closed="closeEvent">
             <el-form ref="userInfoFrom" :model="usersInfo">
-               <el-form-item style="display:none" label="id" :label-width="formLabelWidth">
+              <el-form-item style="display:none" label="id" :label-width="formLabelWidth">
                 <el-input type="text" v-model="usersInfo.eId"></el-input>
               </el-form-item>
               <el-form-item label="用户名称" :label-width="formLabelWidth">
@@ -116,21 +116,21 @@
 
               <el-form-item v-if="visible" label-width="70px" label="密码">
                 <el-input type="password" v-model="usersInfo.ePwd" placeholder="请输入密码">
-                  <i
-                    slot="suffix"
-                    title="显示密码"
-                    @click="changePass('show')"
-                    style="cursor:pointer;"
-                    
-                  >
-                    <img src="../../assets/biyan.png" style="width:20px;height:20px; margin-top:12px;" />
+                  <i slot="suffix" title="显示密码" @click="changePass('show')" style="cursor:pointer;">
+                    <img
+                      src="../../assets/biyan.png"
+                      style="width:20px;height:20px; margin-top:12px;"
+                    />
                   </i>
                 </el-input>
               </el-form-item>
               <el-form-item v-else label="密码" label-width="70px">
                 <el-input type="text" v-model="usersInfo.ePwd" placeholder="请输入密码">
                   <i slot="suffix" title="隐藏密码" @click="changePass('hide')" style="cursor:pointer;">
-                    <img src="../../assets/zhengyan.png" style="width:20px;height:20px;margin-top:12px;" />
+                    <img
+                      src="../../assets/zhengyan.png"
+                      style="width:20px;height:20px;margin-top:12px;"
+                    />
                   </i>
                 </el-input>
               </el-form-item>
@@ -173,7 +173,7 @@ export default {
       },
       total: 1,
       usersInfo: {
-        eId:"",
+        eId: "",
         eName: "",
         ePhone: "",
         eSex: "",
@@ -222,7 +222,20 @@ export default {
           message: "操作成功",
           type: "success",
         });
+      this.getUsersList();
       return this.$message("操作失败");
+    },
+    //关闭弹出层回调
+    closeEvent() {
+      this.$refs.userInfoFrom.resetFields();
+      (this.usersInfo.eId = ""),
+        (this.usersInfo.eName = ""),
+        (this.usersInfo.ePhone = ""),
+        (this.usersInfo.eSex = ""),
+        (this.usersInfo.eBirth = ""),
+        (this.usersInfo.rId = ""),
+        (this.usersInfo.eLogin = ""),
+        (this.usersInfo.ePwd = "");
     },
     //弹出层
     AddUsers() {
@@ -231,7 +244,7 @@ export default {
     },
     //添加保存
     async saveUserInfo() {
-      const res = await adduserListService(this.usersInfo);   
+      const res = await adduserListService(this.usersInfo);
       if (res.data > 0)
         return this.$message({
           message: "保存成功",
@@ -273,7 +286,7 @@ export default {
 .bodyDiv {
   width: 100%;
   height: 700px;
- 
+
   margin: 10px;
 }
 </style>

@@ -97,17 +97,10 @@ const routes = [
         path: "feedback",
         component: () => import("../views/content/feedback.vue")
       },
+ 
       {
-        path: "repaymentAlso",
-        component: () => import("../views/HuanKuan/repaymentAlso.vue")
-      },
-      {
-        path: "repaymenthave",
-        component: () => import("../views/HuanKuan/repaymenthave.vue")
-      },
-      {
-        path: "Hasbeenpayment",
-        component: () => import("../views/HuanKuan/Hasbeenpayment.vue")
+        path: "log",
+        component: () => import("../views/logmanagement/log.vue")
       },
       
     ]
