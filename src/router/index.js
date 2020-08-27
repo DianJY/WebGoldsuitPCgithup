@@ -109,18 +109,7 @@ const routes = [
         path: "paid",
         component: () => import("../views/repayment/paid.vue")
       },
-      {
-        path: "repaymentAlso",
-        component: () => import("../views/HuanKuan/repaymentAlso.vue")
-      },
-      {
-        path: "repaymenthave",
-        component: () => import("../views/HuanKuan/repaymenthave.vue")
-      },
-      {
-        path: "Hasbeenpayment",
-        component: () => import("../views/HuanKuan/Hasbeenpayment.vue")
-      },
+
 
     ]
   },
