@@ -118,7 +118,16 @@ const routes = [
         path: "repaymentbyremittance",
         component: () => import("../views/repayment/repaymentbyremittance.vue")
       },
+      {
       
+        path: "Deposit_log",
+        component: () => import("../views/logmanagement/Deposit_log.vue")
+      },
+      {
+        path: "Reimbursement_log",
+        component: () => import("../views/logmanagement/Reimbursement_log.vue")
+      },
+
 
     ]
   },

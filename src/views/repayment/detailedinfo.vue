@@ -178,7 +178,9 @@
           <el-table-column type="index" label="序号" width="180"></el-table-column>
           <el-table-column prop="uName" label="投资人姓名/企业名称" width="180"></el-table-column>
           <el-table-column prop="bnumber" label="投资人存管账号"></el-table-column>
-          <el-table-column prop="InvesDate" label="投资时间" width="180"></el-table-column>
+          <el-table-column prop="InvesDate" label="投资时间" width="180">
+             <template slot-scope="scope">{{scope.row.InvesDate | dataFormart}}</template>
+          </el-table-column>
           <el-table-column prop="InvesMoney" label="投资金额" width="180"></el-table-column>
           <el-table-column prop="address" label="预期本息总金额">
             <template slot-scope="scope">
@@ -199,7 +201,9 @@
           <el-table-column type="index" label="序号" width="180"></el-table-column>
           <el-table-column prop="eName" label="审批人" width="180"></el-table-column>
           <el-table-column prop="reContent" label="审批结果"></el-table-column>
-          <el-table-column prop="jDateTime" label="审批时间" width="200"></el-table-column>
+          <el-table-column prop="jDateTime" label="审批时间" width="200">
+            <template slot-scope="scope">{{scope.row.jDateTime | dataFormart}}</template>
+          </el-table-column>
         </el-table>
       </el-tab-pane>
     </el-tabs>

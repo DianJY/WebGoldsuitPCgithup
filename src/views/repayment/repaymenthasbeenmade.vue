@@ -14,7 +14,9 @@
         <el-table :data="tableData" stripe style="width: 100%">
           <el-table-column type="index" label="序号" width="100"></el-table-column>
           <el-table-column prop="pName" label="项目名称" width="130"></el-table-column>
-          <el-table-column prop="rClearing" label="还款清算日" width="130"></el-table-column>
+          <el-table-column prop="rClearing" label="还款清算日" width="130">
+                <template slot-scope="scope">{{scope.row.rClearing | dataFormart}}</template>
+          </el-table-column>
           <el-table-column prop="rShould" label="应还本金" width="140"></el-table-column>
           <el-table-column prop="rInterest" label="应还利息" width="130"></el-table-column>
           <el-table-column prop="rSumMoney" label="应还总金额" width="140"></el-table-column>

@@ -7,7 +7,8 @@
       <el-breadcrumb separator="/" style="margin: 15px;">
         <el-breadcrumb-item :to="{ path: '/index/zhuye'}">首页</el-breadcrumb-item>
         <el-breadcrumb-item>日志管理</el-breadcrumb-item>
-        <el-breadcrumb-item>登录日志管理</el-breadcrumb-item>
+        <el-breadcrumb-item>划账日志管理</el-breadcrumb-item>
+        <el-breadcrumb-item></el-breadcrumb-item>
       </el-breadcrumb>
       <div class="bodyDiv">
         <el-form :model="numberValidateForm" class="elfrom">
@@ -52,13 +53,14 @@
 
         <!-- 表格数据列表 -->
         <el-table :data="rizhiList" border stripe>
-          <el-table-column prop="lOgid" v-if="hidden" width="80" align="center"></el-table-column>
+          <el-table-column prop="rjId" v-if="hidden" width="80" align="center"></el-table-column>
           <el-table-column type="index" label="序号" width="80" align="center"></el-table-column>
+          <el-table-column prop="UserName" label="借款人" width="200" align="center"></el-table-column>
           <el-table-column prop="eName" label="操作人" width="200" align="center"></el-table-column>
-          <el-table-column prop="oPerDate" label="操作时间" width="250" align="center">
-            <template slot-scope="scope">{{scope.row.oPerDate | dataFormart}}</template>
+          <el-table-column prop="ReDateTime" label="操作时间" width="250" align="center">
+            <template slot-scope="scope">{{scope.row.ReDateTime | dataFormart}}</template>
           </el-table-column>
-          <el-table-column prop="oPercontent" label="内容" width="280" align="center"></el-table-column>
+          <el-table-column prop="reSate" label="内容" width="200" align="center"></el-table-column>
         </el-table>
 
         <!-- 分页控件 -->
@@ -78,7 +80,7 @@
 </template>
 
 <script>
-import { getlogInfoService } from "../../network/rizhi";
+import { getDepositInfoService } from "../../network/rizhi";
 export default {
   created() {
     this.getlogInfoList();
@@ -94,7 +96,7 @@ export default {
       },
       queryInfo: {
         pagenum: 1,
-        pagesize: 5,
+        pagesize: 3,
       },
       total: 1,
     };
@@ -102,10 +104,10 @@ export default {
 
   methods: {
     async getlogInfoList() {
-      const res = await getlogInfoService(
+      const res = await getDepositInfoService(
         this.queryInfo.pagenum,
         this.queryInfo.pagesize,
-        this.numberValidateForm,
+        this.numberValidateForm
       );
       this.rizhiList = res.data.data;
       this.total = res.data.totle;
@@ -124,16 +126,7 @@ export default {
       this.getlogInfoList();
     },
     async mohu() {
-        this.getlogInfoList();
-      // const res = await tiaojianService(
-      //   this.queryInfo.pagenum,
-      //   this.queryInfo.pagesize,
-      //   this.numberValidateForm.czr,
-      //   this.numberValidateForm.czdateK,
-      //   this.numberValidateForm.czdateJ
-      // );
-      //  this.rizhiList = res.data.data;
-      // this.total = res.data.totle;
+      this.getlogInfoList();
     },
   },
 };

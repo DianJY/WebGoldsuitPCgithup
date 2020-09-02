@@ -207,6 +207,20 @@ var routes = [{
         return _interopRequireWildcard(require("../views/repayment/repaymentbyremittance.vue"));
       });
     }
+  }, {
+    path: "Deposit_log",
+    component: function component() {
+      return Promise.resolve().then(function () {
+        return _interopRequireWildcard(require("../views/logmanagement/Deposit_log.vue"));
+      });
+    }
+  }, {
+    path: "Reimbursement_log",
+    component: function component() {
+      return Promise.resolve().then(function () {
+        return _interopRequireWildcard(require("../views/logmanagement/Reimbursement_log.vue"));
+      });
+    }
   }]
 }, {
   path: "/login",

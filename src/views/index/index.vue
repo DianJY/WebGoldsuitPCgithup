@@ -4,7 +4,7 @@
       <el-header>
         <b class="headB">后台管理</b>
         <div style="  line-height: 60px;">
-          <el-button type="info">退出</el-button>
+          <el-button type="info" @click="tuichu">退出</el-button>
         </div>
       </el-header>
       <el-container>
@@ -40,8 +40,7 @@
 import { menusList } from "../../network/index";
 export default {
   created() {
-    this.LeftMenusList();  
-   
+    this.LeftMenusList();
   },
   data() {
     return {
@@ -52,11 +51,12 @@ export default {
     async LeftMenusList() {
       let rId = window.sessionStorage.getItem("rId");
       const { data: res } = await menusList(rId);
-
-
       if (res.Code !== 200) return this.$message("获取数据错误！");
-
       this.MenusList = res.Data;
+    },
+
+    tuichu() {
+      this.$router.replace({ path: "/login" });
     },
   },
 };

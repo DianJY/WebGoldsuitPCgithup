@@ -23,7 +23,9 @@
               <label>{{scope.row.pTerm}} 天</label>
             </template>
           </el-table-column>
-          <el-table-column prop="PreheatDate" label="预热开始时间" width="180"></el-table-column>
+          <el-table-column prop="PreheatDate" label="预热开始时间" width="180">
+             <template slot-scope="scope">{{scope.row.PreheatDate | dataFormart}}</template>
+          </el-table-column>
           <el-table-column label="投资开始---投资结束" width="350">
             <template slot-scope="scope">
               <label>{{scope.row.InvestmentDate}}---{{scope.row.InvestmentEndDate}}</label>
@@ -65,7 +67,9 @@
             <el-table-column type="index" label="序号" width="100"></el-table-column>
             <el-table-column prop="eName" label="操作人" width="130"></el-table-column>
             <el-table-column prop="reContent" label="内容" ></el-table-column>
-            <el-table-column prop="jDateTime" label="时间" width="300"></el-table-column>
+            <el-table-column prop="jDateTime" label="时间" width="300">
+                 <template slot-scope="scope">{{scope.row.jDateTime | dataFormart}}</template>
+            </el-table-column>
           </el-table>
         </el-dialog>
       </div>
