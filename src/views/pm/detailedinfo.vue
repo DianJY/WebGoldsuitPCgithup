@@ -178,7 +178,9 @@
           <el-table-column type="index" label="序号" width="180"></el-table-column>
           <el-table-column prop="uName" label="投资人姓名/企业名称" width="180"></el-table-column>
           <el-table-column prop="bnumber" label="投资人存管账号"></el-table-column>
-          <el-table-column prop="InvesDate" label="投资时间" width="180"></el-table-column>
+          <el-table-column prop="InvesDate" label="投资时间" width="180">
+             <template slot-scope="scope">{{scope.row.InvesDate | dataFormart}}</template>
+          </el-table-column>
           <el-table-column prop="InvesMoney" label="投资金额" width="180"></el-table-column>
           <el-table-column prop="address" label="预期本息总金额">
             <template slot-scope="scope">
@@ -199,7 +201,9 @@
           <el-table-column type="index" label="序号" width="180"></el-table-column>
           <el-table-column prop="uName" label="借款人姓名/企业名称" width="180"></el-table-column>
           <el-table-column prop="bNumber" label="借款人存管账号" width="180"></el-table-column>
-          <el-table-column prop="ReDateTime" label="划账时间" width="200"></el-table-column>
+          <el-table-column prop="ReDateTime" label="划账时间" width="200">
+               <template slot-scope="scope">{{scope.row.ReDateTime | dataFormart}}</template>
+          </el-table-column>
           <el-table-column prop="ReState" label="划账状态" width="180"></el-table-column>
           <el-table-column prop="ReMoney" label="划账金额"></el-table-column>
         </el-table>
@@ -216,7 +220,9 @@
           <div class="divtitleSy">还款总信息</div>
         </div>
         <el-table :data="RepaymentList" stripe style="width: 100%">
-          <el-table-column prop="rClearing" label="还款清算日" width="180"></el-table-column>
+          <el-table-column prop="rClearing" label="还款清算日" width="180">
+             <template slot-scope="scope">{{scope.row.rClearing | dataFormart}}</template>
+          </el-table-column>
           <el-table-column prop="rShould" label="应还本金" width="180"></el-table-column>
           <el-table-column prop="rInterest" label="应还利息" width="200"></el-table-column>
           <el-table-column prop="rSumMoney" label="应还总金额" width="180"></el-table-column>
@@ -231,7 +237,9 @@
           <el-table-column prop="rBnumber" label="还款人存管账号" width="180"></el-table-column>
           <el-table-column prop="UserName" label="收款人户名" width="200"></el-table-column>
           <el-table-column prop="bnumber" label="收款人存管账号" width="180"></el-table-column>
-          <el-table-column prop="ReDateTime" label="还款时间"></el-table-column>
+          <el-table-column prop="ReDateTime" label="还款时间">
+               <template slot-scope="scope">{{scope.row.ReDateTime | dataFormart}}</template>
+          </el-table-column>
           <el-table-column prop="reSate" label="还款状态"></el-table-column>
           <el-table-column prop="reMoney" label="还款金额"></el-table-column>
         </el-table>

@@ -75,7 +75,7 @@
           <el-table-column prop="LoginPhone" label="手机号" width="250" align="center"></el-table-column>
           <el-table-column prop="fContent" label="反馈内容" width="200" align="center"></el-table-column>
           <el-table-column prop="fDateTime" label="提交时间" width="250" align="center">
-            <template slot-scope="scope">{{scope.row.fDateTime | dataFormart}}</template>
+            <template slot-scope="scope">{{scope.row.fDateTime | dataFormart1}}</template>
           </el-table-column>
           <el-table-column label="操作" width="250" align="center">
             <template slot-scope="data">

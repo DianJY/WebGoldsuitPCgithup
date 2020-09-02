@@ -14,7 +14,9 @@
           <el-table-column type="index" label="序号" width="180"></el-table-column>
           <el-table-column prop="uName" label="借款人姓名/企业名称" width="180"></el-table-column>
           <el-table-column prop="bNumber" label="借款人存管账号" width="180"></el-table-column>
-          <el-table-column prop="ReDateTime" label="划账时间" width="200"></el-table-column>
+          <el-table-column prop="ReDateTime" label="划账时间" width="200">
+             <template slot-scope="scope">{{scope.row.ReDateTime | dataFormart}}</template>
+          </el-table-column>
           <el-table-column prop="ReState" label="划账状态" width="180"></el-table-column>
           <el-table-column prop="ReMoney" label="划账金额" width="180"></el-table-column>
           <el-table-column label="操作" width="290">

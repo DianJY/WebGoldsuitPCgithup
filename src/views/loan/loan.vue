@@ -39,7 +39,9 @@
             <el-table-column prop="uPhone" label="借款人手机号" width="180"></el-table-column>
             <el-table-column prop="ubnumber" label="借款人存管账号" width="180"></el-table-column>
             <el-table-column prop="lPrice" label="借款金额（元）" width="150"></el-table-column>
-            <el-table-column prop="lDateTime" label="申请日期" width="180"></el-table-column>
+            <el-table-column prop="lDateTime" label="申请日期" width="180">
+                 <template slot-scope="scope">{{scope.row.lDateTime | dataFormart}}</template>
+            </el-table-column>
             <el-table-column label="操作" width="180">
               <template slot-scope="scope">
                 <el-button

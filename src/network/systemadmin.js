@@ -20,6 +20,15 @@ export function deleteUserService(id) {
         }
     })
 }
+export function deleteUserService1(id) {
+    return ajaxRequest({
+        method: 'get',
+        url: 'api/UsersManagement/DeleteUsers1',
+        params: {
+            id: id
+        }
+    })
+}
 
 
 export function getRolesListService() {

@@ -180,7 +180,9 @@
           <el-table-column prop="eName" label="负责人"></el-table-column>
           <el-table-column prop="aStage" label="处理操作"></el-table-column>
           <el-table-column prop="aContent" label="驳回理由"></el-table-column>
-          <el-table-column prop="aDateTime" label="处理完成时间"></el-table-column>
+          <el-table-column prop="aDateTime" label="处理完成时间">
+               <template slot-scope="scope">{{scope.row.aDateTime | dataFormart}}</template>
+          </el-table-column>
         </el-table>
       </el-tab-pane>
     </el-tabs>

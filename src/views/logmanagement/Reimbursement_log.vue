@@ -7,7 +7,8 @@
       <el-breadcrumb separator="/" style="margin: 15px;">
         <el-breadcrumb-item :to="{ path: '/index/zhuye'}">首页</el-breadcrumb-item>
         <el-breadcrumb-item>日志管理</el-breadcrumb-item>
-        <el-breadcrumb-item>登录日志管理</el-breadcrumb-item>
+        <el-breadcrumb-item>还款日志管理</el-breadcrumb-item>
+        <el-breadcrumb-item></el-breadcrumb-item>
       </el-breadcrumb>
       <div class="bodyDiv">
         <el-form :model="numberValidateForm" class="elfrom">
@@ -52,14 +53,46 @@
 
         <!-- 表格数据列表 -->
         <el-table :data="rizhiList" border stripe>
-          <el-table-column prop="lOgid" v-if="hidden" width="80" align="center"></el-table-column>
+          <el-table-column prop="rjId" v-if="hidden" width="80" align="center"></el-table-column>
+          <el-table-column prop="rId" v-if="hidden" width="80" align="center"></el-table-column>
           <el-table-column type="index" label="序号" width="80" align="center"></el-table-column>
+          <el-table-column prop="pNmae" label="还款项目" width="200" align="center"></el-table-column>
           <el-table-column prop="eName" label="操作人" width="200" align="center"></el-table-column>
-          <el-table-column prop="oPerDate" label="操作时间" width="250" align="center">
-            <template slot-scope="scope">{{scope.row.oPerDate | dataFormart}}</template>
+          <el-table-column prop="ReDateTime" label="操作时间" width="250" align="center">
+            <template slot-scope="scope">{{scope.row.ReDateTime | dataFormart}}</template>
           </el-table-column>
-          <el-table-column prop="oPercontent" label="内容" width="280" align="center"></el-table-column>
+          <el-table-column prop="reSate" label="内容" width="200" align="center"></el-table-column>
+          <el-table-column label="操作" width="250" align="center">
+            <template slot-scope="data">
+              <el-button size="small" @click="detaile(data.row.rId)">查看详情</el-button>
+            </template>
+          </el-table-column>
         </el-table>
+
+        <el-dialog title="新闻公告详情" :visible.sync="dialogVisible" width="70%">
+          <el-table :data="huankuanList" border stripe>
+            <el-table-column prop="reId" v-if="hidden" width="80" align="center"></el-table-column>
+            <el-table-column type="index" label="序号" width="80" align="center"></el-table-column>
+            <el-table-column prop="pNmae" label="项目名称" width="200" align="center"></el-table-column>
+            <el-table-column prop="UserName" label="投资人" width="200" align="center"></el-table-column>
+            <el-table-column prop="ReDateTime" label="还款时间时间" width="250" align="center">
+              <template slot-scope="scope">{{scope.row.ReDateTime | dataFormart}}</template>
+            </el-table-column>
+            <el-table-column prop="reMoney" label="还款金额" width="200" align="center"></el-table-column>
+          </el-table>
+
+          <!-- 分页控件 -->
+          <el-pagination
+            style="margin-top:20px; "
+            @size-change="handleSizeChange1"
+            @current-change="handleCurrentChange1"
+            :current-page="xqInfo1.pagenum1"
+            :page-sizes="[1, 2, 3, 4,5]"
+            :page-size="xqInfo1.pagesize1"
+            :total="total1"
+            layout="total, sizes, prev, pager, next, jumper"
+          ></el-pagination>
+        </el-dialog>
 
         <!-- 分页控件 -->
         <el-pagination
@@ -78,7 +111,10 @@
 </template>
 
 <script>
-import { getlogInfoService } from "../../network/rizhi";
+import {
+  getReimbursementInfoService,
+  getRepaymentesService,
+} from "../../network/rizhi";
 export default {
   created() {
     this.getlogInfoList();
@@ -86,6 +122,8 @@ export default {
   data() {
     return {
       rizhiList: [],
+      huankuanList: [],
+      dialogVisible: false,
       hidden: false,
       numberValidateForm: {
         czr: "",
@@ -94,18 +132,24 @@ export default {
       },
       queryInfo: {
         pagenum: 1,
-        pagesize: 5,
+        pagesize: 3,
       },
       total: 1,
+      xqInfo1: {
+        pagenum1: 1,
+        pagesize1: 3,
+        rids: "",
+      },
+      total1: 1,
     };
   },
 
   methods: {
     async getlogInfoList() {
-      const res = await getlogInfoService(
+      const res = await getReimbursementInfoService(
         this.queryInfo.pagenum,
         this.queryInfo.pagesize,
-        this.numberValidateForm,
+        this.numberValidateForm
       );
       this.rizhiList = res.data.data;
       this.total = res.data.totle;
@@ -123,17 +167,31 @@ export default {
       this.queryInfo.pagenum = newValue;
       this.getlogInfoList();
     },
+    handleSizeChange1(newValue) {
+      this.xqInfo1.pagesize1 = newValue;
+      this.detaile();
+    },
+    handleCurrentChange1(newValue) {
+      this.xqInfo1.pagenum1 = newValue;
+      this.detaile();
+    },
     async mohu() {
-        this.getlogInfoList();
-      // const res = await tiaojianService(
-      //   this.queryInfo.pagenum,
-      //   this.queryInfo.pagesize,
-      //   this.numberValidateForm.czr,
-      //   this.numberValidateForm.czdateK,
-      //   this.numberValidateForm.czdateJ
-      // );
-      //  this.rizhiList = res.data.data;
-      // this.total = res.data.totle;
+      this.getlogInfoList();
+    },
+    async detaile(rId) {
+      if (this.xqInfo1.rids == "") {
+        this.xqInfo1.rids = rId;
+      }
+      this.dialogVisible = true;
+      console.log(this.xqInfo1.rids);
+      const res = await getRepaymentesService(
+        this.xqInfo1.pagenum1,
+        this.xqInfo1.pagesize1,
+        this.xqInfo1.rids
+      );
+      console.log(res);
+      this.huankuanList = res.data.data;
+      this.total1 = res.data.totle;
     },
   },
 };

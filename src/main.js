@@ -15,10 +15,19 @@ Vue.filter('dataFormart', function (value) {
   const mm = (dt.getMonth() + 1 + '').padStart(2, '0')
   const dd = (dt.getDate() + '').padStart(2, '0')
 
-  // const hh = (dt.getHours() + '').padStart(2, '0')
-  // const mi = (dt.getMinutes() + '').padStart(2, '0')
-  // const ss = (dt.getSeconds() + '').padStart(2, '0')
-  return `${yyyy}-${mm}-${dd}  `
+  const hh = (dt.getHours() + '').padStart(2, '0')
+  const mi = (dt.getMinutes() + '').padStart(2, '0')
+  const ss = (dt.getSeconds() + '').padStart(2, '0')
+  return `${yyyy}-${mm}-${dd}:${hh}:${mi}:${ss}  `
+})
+
+Vue.filter('dataFormart1', function (value) {
+  let dt = new Date(value)
+  const yyyy = dt.getFullYear();
+  const mm = (dt.getMonth() + 1 + '').padStart(2, '0')
+  const dd = (dt.getDate() + '').padStart(2, '0')
+
+  return `${yyyy}-${mm}-${dd} `
 })
 
 Vue.config.productionTip = false

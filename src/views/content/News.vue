@@ -53,7 +53,6 @@
               <i class="el-icon-close" style="color:red" v-else></i>
             </template>
           </el-table-column>
-
           <el-table-column label="操作" width="250" align="center">
             <template slot-scope="data">
               <el-button size="small" @click="detaile(data.row)">查看详情</el-button>
@@ -74,7 +73,7 @@
           layout="total, sizes, prev, pager, next, jumper"
         ></el-pagination>
 
-        <!-- 弹出层：新闻详情 -->
+        <!-- 弹出层：新闻详情
         <el-dialog
           class="el-dialog"
           title="新闻公告详情"
@@ -115,10 +114,31 @@
               </th>
             </tr>
           </table>
+        </el-dialog>-->
+
+        <el-dialog title="新闻公告详情" :visible.sync="dialogVisible" width="30%">
+          <div style="width: 100%; height: 100%;margin:10px auto; text-align: center;">
+            <p style="font-size:18px;">
+              类型：
+              <span style="color:red">{{newsList.nType}}</span>
+            </p>
+            <p style="font-size:18px;margin-left:-52px;">
+              标题：
+              <span style="color:red">{{newsList.nTiteName}}</span>
+            </p>
+            <p style="font-size:18px;margin-left:-52px;">
+              内容：
+              <span style="color:red">{{newsList.nContent}}</span>
+            </p>
+            <p style="font-size:18px;margin-left:-70px;">
+              是否显示：
+              <span style="color:red">{{newsList.nDisplay}}</span>
+            </p>
+          </div>
         </el-dialog>
 
         <!-- 弹出层：新增 -->
-        <el-dialog title="新闻公告详情" :visible.sync="diaolgAdd" @closed="closeEvent">
+        <el-dialog title="添加新闻公告" :visible.sync="diaolgAdd" @closed="closeEvent">
           <el-form ref="userInfoFrom" :model="newsListadd">
             <el-form-item style="display:none" label="nId" :label-width="formLabelWidth">
               <el-input v-model="newsListadd.nId"></el-input>
@@ -149,7 +169,7 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="diaolgAdd = false">取 消</el-button>
-            <el-button type="primary">预览</el-button>
+
             <el-button type="primary" @click="insertNews">发布</el-button>
           </div>
         </el-dialog>
@@ -270,23 +290,6 @@ export default {
 </script>
 
 <style scoped>
-.el-dialog {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  margin: 0 !important;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /*height:600px;*/
-  max-height: calc(100% - 30px);
-  max-width: calc(100% - 30px);
-}
-.el-dialog .el-dialog__body {
-  flex: 1;
-  overflow: auto;
-}
 .mytable {
   width: 100%;
 }

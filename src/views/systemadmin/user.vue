@@ -49,7 +49,18 @@
             <el-table-column label="操作" width="180" align="center">
               <template slot-scope="scope">
                 <el-button size="small" @click="updateUser(scope.row.eId)">编辑</el-button>
-                <el-button type="danger" @click="deleteUser(scope.row)" size="small">删除</el-button>
+                <el-button
+                  type="danger"
+                  @click="deleteUser(scope.row)"
+                  size="small"
+                  v-if="scope.row.eState=='在职人员'"
+                >{{zhuangtai}}</el-button>
+                <el-button
+                  type="success"
+                  @click="deleteUser1(scope.row)"
+                  size="small"
+                  v-else
+                >{{zhuangtai1}}</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -154,6 +165,7 @@ import {
   getRolesListService,
   adduserListService,
   GetUsersInfoById,
+  deleteUserService1,
 } from "../../network/systemadmin";
 export default {
   created() {
@@ -162,6 +174,8 @@ export default {
   },
   data() {
     return {
+      zhuangtai: "禁用",
+      zhuangtai1: "启用",
       visible: true,
       editState: "block",
       formLabelWidth: "70px",
@@ -214,15 +228,34 @@ export default {
       this.queryInfo.pagenum = newValue;
       this.getUsersList();
     },
-    //删除
+    //禁用
     async deleteUser(userInfo) {
+      if (userInfo.eState == "离职人员") {
+        return this.$message("已禁用不可重复操作");
+      }
       const res = await deleteUserService(userInfo.eId);
+       this.getUsersList();
       if (res.status === 200)
         return this.$message({
           message: "操作成功",
           type: "success",
         });
-      this.getUsersList();
+     
+      return this.$message("操作失败");
+    },
+    //启用
+    async deleteUser1(userInfo) {
+      if (userInfo.eState == "在职人员") {
+        return this.$message("已启用不可重复操作");
+      }
+      const res = await deleteUserService1(userInfo.eId);
+         this.getUsersList();
+      if (res.status === 200)
+        return this.$message({
+          message: "操作成功",
+          type: "success",
+        });
+   
       return this.$message("操作失败");
     },
     //关闭弹出层回调
