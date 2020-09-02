@@ -113,6 +113,7 @@ const routes = [
       {
         path: "paid",
         component: () => import("../views/repayment/paid.vue")
+<<<<<<< HEAD
       },
       {
         path: "Deposit_log",
@@ -121,6 +122,8 @@ const routes = [
       {
         path: "Reimbursement_log",
         component: () => import("../views/logmanagement/Reimbursement_log.vue")
+=======
+>>>>>>> f10e77bf322697dba1f336bf85e54e8e2e7b71c6
       },
 
 
