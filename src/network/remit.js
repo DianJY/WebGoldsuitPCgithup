@@ -80,3 +80,11 @@ export function GetProjectInfo(pId) {
         url: 'api/Depositmanagement/GetProjectInfo?pId='+pId,
     })
 }
+
+//划账
+export function TransferProject(obj) {
+    return ajaxRequest({
+        method: 'get',
+        url: `api/Depositmanagement/TransferProject?rId=${obj.rId}&&eId=${obj.eId}`,
+    })
+}

@@ -114,7 +114,11 @@ const routes = [
         path: "paid",
         component: () => import("../views/repayment/paid.vue")
       },
-
+      {
+        path: "repaymentbyremittance",
+        component: () => import("../views/repayment/repaymentbyremittance.vue")
+      },
+      
 
     ]
   },

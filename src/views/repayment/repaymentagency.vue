@@ -3,6 +3,10 @@
   <div>
     <!--/* 还款代办 */-->
     <el-card class="box-card">
+      <label>项目名称：</label>
+      <el-input style="width:500px;margin:0px 10px" v-model="paging.pName"></el-input>
+      <el-button @click="Fuzzyquery">查询</el-button>
+
       <el-breadcrumb separator="/" style="margin: 15px;">
         <el-breadcrumb-item :to="{ path: '/index/zhuye' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>还款管理</el-breadcrumb-item>
@@ -105,6 +109,7 @@ export default {
       paging: {
         pageIndex: 1,
         limit: 5,
+        pName: "",
       },
       totle: 0,
       dialogFormVisible: false,
@@ -112,7 +117,6 @@ export default {
       dialogVisible: false,
       dialogVisible1: false,
       pId: "",
-      pName: "",
       dialogVisible2: false,
       RepayReject: [],
     };
@@ -122,7 +126,7 @@ export default {
       var obj = {
         pageIndex: this.paging.pageIndex,
         limit: this.paging.limit,
-        pName: this.pName,
+        pName: this.paging.pName,
       };
 
       const res = await GetProjectList(obj);
@@ -153,7 +157,6 @@ export default {
 
     async ApprovePstate(pId) {
       const state = await GetRepaymentInfo(pId);
-      console.log(state.data.Data.reSate);
       if (
         state.data.Data.reSate == null ||
         state.data.Data.reSate == "已驳回"
@@ -175,10 +178,14 @@ export default {
     },
     async Bohui(pId) {
       const res = await GetRepayRejectList(pId);
-   
+
       this.RepayReject = res.data.Data;
-       console.log( res);
+
       this.dialogVisible2 = true;
+    },
+    Fuzzyquery() {
+      this.paging.pageIndex = 1;
+      this.GetProjectListData();
     },
   },
 };

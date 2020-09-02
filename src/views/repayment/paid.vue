@@ -6,10 +6,10 @@
       <el-breadcrumb separator="/" style="margin: 15px;">
         <el-breadcrumb-item :to="{ path: '/index/zhuye' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>还款管理</el-breadcrumb-item>
-        <el-breadcrumb-item>还款代办</el-breadcrumb-item>
+        <el-breadcrumb-item>已还款</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="divtitle">
-        <div class="divtitleSy">还款代办</div>
+        <div class="divtitleSy">已还款</div>
       </div>
       <div class="bodyDiv">
         <el-table :data="tableData" stripe style="width: 100%">

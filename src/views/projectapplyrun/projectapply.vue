@@ -333,14 +333,14 @@ export default {
 
       //平台总服务费
       this.project.Totalplatform = (
-        this.project.Loanamount *
-        (this.project.Platform / 100)
+        parseFloat(this.project.Loanamount) *
+        parseFloat(this.project.Platform / 100)
       ).toFixed(2);
 
       //投资之家总服务费
       this.project.TotalLiutou = (
-        this.project.Loanamount *
-        (this.project.Liutou / 100)
+        parseFloat(this.project.Loanamount) *
+        parseFloat(this.project.Liutou / 100)
       ).toFixed(2);
 
       //投资人预期总利息
@@ -353,7 +353,7 @@ export default {
 
       //总还款
       this.project.Totalamount = (
-          parseFloat(this.project.Loanamount) +
+        parseFloat(this.project.Loanamount) +
         parseFloat(this.project.Totalinterest) +
         parseFloat(this.project.Totalplatform) +
         parseFloat(this.project.TotalLiutou)
@@ -396,6 +396,8 @@ export default {
     },
     //保存
     async projectapplySave() {
+      if (this.lid == "") return this.$message.error("请选择已受理项目。");
+
       this.borrower.bCertified = this.checked.join(",");
       this.borrower.lid = this.lid;
       this.project.lid = this.lid;
