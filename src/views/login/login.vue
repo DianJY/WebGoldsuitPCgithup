@@ -69,9 +69,7 @@ export default {
       window.sessionStorage.setItem(
         "token",
         JSON.stringify(res.data.Data.token)
-      );
-
-   
+      ); 
      
       this.$message({
         message: "登陆成功",
